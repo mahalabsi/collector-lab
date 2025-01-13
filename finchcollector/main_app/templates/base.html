@@ -10,6 +10,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </head>
   <body>
     <header class="navbar-fixed">
@@ -24,15 +25,16 @@
           </ul>
           <ul class="right">
             <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'index' %}">View all my finches</a></li>
+            <li><a href="{% url 'finches_create' %}">Add a Finch</a></li>
+            <li><a href="{% url 'index' %}">View All My Finches</a></li>
           </ul>
         </div>
       </nav>
     </header>
-    <main class="container">{%block content%} {%endblock%}</main>
+    <main class="container">{% block content %} {% endblock %}</main>
     <footer class="page-footer">
       <div class="right">
-        All rights Reserved, &copy; 2025 Finch Collector &nbsp
+        All rights Reserved, &copy; 2025 Finch Collector &nbsp;
       </div>
     </footer>
   </body>

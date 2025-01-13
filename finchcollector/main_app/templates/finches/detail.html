@@ -13,6 +13,12 @@
     {% else %}
     <p>Age: little finch</p>
     {% endif %}
+
+    <div class="card-section">
+      <a href="{% url 'finches_update' finch.id%}">Edit</a>
+      <a href="{% url 'finches_delete' finch.id%}">Delete</a>
+    </div>
+
     <div>
       {% load static %}
       <img
@@ -23,4 +29,42 @@
     </div>
   </div>
 </div>
+
+<div>
+  <div>
+    <form method="post" action="{% url 'add_visit' finch.id %}">
+      {%csrf_token%} {{visit_form.as_p}}
+      <input type="submit" class="btn" value="add visit" />
+    </form>
+  </div>
+  <table class="striped">
+    <thread>
+      <tr>
+        <th>Date</th>
+        <th>Duration</th>
+      </tr>
+    </thread>
+    <tbody>
+      {% for visit in finch.visit_set.all%}
+      <tr>
+        <td>{{visit.date}}</td>
+        <td>{{visit.get_duration_display}}</td>
+      </tr>
+      {%endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  var dateEl = document.getElementById('id_date')
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  })
+
+  let selectEl = document.getElementById('id_duration')
+  M.FormSelect.init(selectEl)
+</script>
 {% endblock %}
