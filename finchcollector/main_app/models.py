@@ -7,7 +7,14 @@ DURATIONS = (
     ('N', 'Night')
 )
 
-
+class Home(models.Model):
+    type=models.CharField(max_length=50)
+    color=models.CharField(max_length=20)
+    def __str__(self):
+        return self.type
+    
+    def get_absolute_url(self):
+        return reverse('homes_detail',kwargs={'pk': self.id})
 
 
 
@@ -19,6 +26,7 @@ class Finch(models.Model):
     age = models.IntegerField()
     # image = models.CharField(default=None, blank=True, null=True, max_length=2000)
     image = models.ImageField(upload_to='main_app/static/uploads/', default="")
+    homes = models.ManyToManyField(Home)
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'finch_id': self.id})
