@@ -21,4 +21,5 @@ urlpatterns = [
     # Unassociate a toy w/ a cat (M:M)
     path('/finches/<int:finch_id>/unassoc_home/<int:home_id>/', views.unassoc_home, name='unassoc_home'),
 
+    path('/accounts/signup/', views.signup, name='signup'),
 ]
